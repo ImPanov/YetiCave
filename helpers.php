@@ -94,7 +94,7 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
  * @param string $two Форма множественного числа для 2, 3, 4: яблока, часа, минуты
  * @param string $many Форма множественного числа для остальных чисел
  *
- * @return string Рассчитанная форма множественнго числа
+ * @return string Рассчитанная форма множественного числа
  */
 function get_noun_plural_form (int $number, string $one, string $two, string $many): string
 {
@@ -143,4 +143,19 @@ function include_template($name, array $data = []) {
     return $result;
 }
 
-
+/** 
+ * Форматирует число в строку
+ * Ограничений: нет
+ * Пример использования
+ * $num = 1000;
+ * echo "Цена {$num}" .
+ *      format_string($num);
+ * Результат: "Цена 1 000 ₽"
+ * 
+ *  @param int $num Цена товара
+ *  @return string Отформатированная строка
+ */
+function format_string($num) {
+    $num = strval(ceil($num));    
+    return $num<1000 ? $num . " ₽" : number_format($num,0,'',' ') . " ₽";
+}

@@ -159,3 +159,29 @@ function format_string($num) {
     $num = strval(ceil($num));    
     return $num<1000 ? $num . " ₽" : number_format($num,0,'',' ') . " ₽";
 }
+
+/** 
+ * подсчёт разницы во времени
+ * Ограничений: строка с датой в формате YYYY-MM-DD
+ *  
+ *  @param string $date
+ *  @return string вывод разницы часы минуты
+ */
+function get_time_left($date) {
+    date_default_timezone_set("Europe/Moscow");
+    $final_date = date_create($date);
+    $cur_date = date_create("now");
+    $diff = date_diff($final_date,$cur_date);
+    $format_diff = date_interval_format($diff, "%d %H %I");
+    $arr = explode(" ",$format_diff);
+
+    $hours = $arr[0] * 24 + $arr[1];
+    $minutes = $arr[2];
+    $hours = str_pad($hours, 2, "0",STR_PAD_LEFT);
+    $minutes = str_pad($minutes, 2, "0",STR_PAD_LEFT);
+
+    $res[] = $hours;
+    $res[] = $minutes;
+
+    return $res;
+}

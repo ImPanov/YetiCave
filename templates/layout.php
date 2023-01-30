@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title><?=$title?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
@@ -51,9 +52,9 @@
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach($categories as $category):?>
+            <?php  foreach($categories as $category):?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=htmlspecialchars($category);?></a>
+                <a href="pages/all-lots.html"><?=htmlspecialchars($category['category_name']);?></a>
             </li>
             <?php endforeach; ?>
         </ul>

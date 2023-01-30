@@ -35,7 +35,7 @@ $goods = [
         'category' => $categories['boots'],
         'price' => 10999,
         'image' => 'img/lot-4.jpg',
-        'expiration' => "2023-02-04",
+        'expiration' => '2023-02-04',
     ],
     [
         'title' => 'Куртка для сноуборда DC Mutiny Charocal',

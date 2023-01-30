@@ -9,7 +9,7 @@ if (!$con) {
     $error = mysqli_connect_error();
 } else {    
     $categories = get_categories($con);
-    $goods = get_news_lots($con);
+    $goods = get_new_lots($con);
 }
 
 $page_content = include_template("main.php", [
@@ -17,7 +17,7 @@ $page_content = include_template("main.php", [
     "goods"=>$goods
 ]);
 
-$layout_content = include_template("layout.php", [
+$layout_content = include_template("main-layout.php", [
     "user_name"=> $user_name,
     "is_auth"=> $is_auth,
     "content"=> $page_content,

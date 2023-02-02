@@ -30,8 +30,12 @@ function get_new_lots($con) {
  * @return array categories
  */
 function get_categories($con) {
-    $sql = 'SELECT categories.category_name, categories.character_code FROM categories';
+    $sql = 'SELECT categories.id, categories.category_name, categories.character_code FROM categories';
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function add_lot($con,$user_id) {
+    $sql = "INSERT INTO lots (title, category_id, lot_description, start_price, step, date_finish, img, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id);";
+    return $sql;
+}

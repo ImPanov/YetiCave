@@ -28,6 +28,7 @@ $layout_content = include_template("base-layout.php", [
     "is_auth" => $is_auth,
     "content" => $page_content,
     'good' => $good[0],
+    'title' => $good[0]['category_name']
 ]);
 
 print($layout_content);

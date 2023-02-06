@@ -34,8 +34,17 @@ function get_categories($con) {
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+function get_user($con) {
+    $sql = 'SELECT * FROM users';
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
 function add_lot($con,$user_id) {
     $sql = "INSERT INTO lots (title, category_id, lot_description, start_price, step, date_finish, img, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id);";
+    return $sql;
+}
+function add_user($con) {
+    $sql = "INSERT INTO users(user_name,user_password,contacts,email) VALUES (?, ?, ?, ?);";
     return $sql;
 }

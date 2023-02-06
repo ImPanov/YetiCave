@@ -51,3 +51,11 @@ function validate_date($date) {
     return null;
     
 }
+function validate_email($email) {
+    if ($email) {
+        if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+            return "Введите корректный email";
+        }
+    }
+    return null;
+}

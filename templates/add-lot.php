@@ -4,7 +4,7 @@
         <?php $classname = isset($errors["lot-name"]) ? "form__item--invalid" : ""; ?>
         <div class="form__item <?= $classname; ?>"> <!-- form__item--invalid -->
           <label for="lot-name">Наименование <sup>*</sup></label>
-          <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?= $lot['lot-name']?? "" ;?>">
+          <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?= $lot['lot-name'] ?? "" ;?>">
           <span class="form__error">Введите наименование лота</span>
         </div>
         <?php $classname = isset($errors["category"]) ? "form__item--invalid" : ""; ?>
@@ -56,7 +56,8 @@
           <span class="form__error"><?= $errors["lot-date"] ; ?></span>
         </div>
       </div>
-      <?php $classname = !empty($errors) ? "form__error--bottom" : ""; ?>
-      <span class="form__error <?= $classname; ?>">Пожалуйста, исправьте ошибки в форме.</span>
+      <?php if (!empty($errors)):?>
+      <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
+      <?php endif;?>
       <button type="submit" class="button">Добавить лот</button>
     </form>

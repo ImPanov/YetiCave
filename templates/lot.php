@@ -9,7 +9,8 @@
           <p class="lot-item__category">Категория: <span><?$good['category_name']?></span></p>
           <p class="lot-item__description"><?$good['lot_description']?></p>
         </div>
-        <div class="lot-item__right">
+        <div class="lot-item__right">          
+        <?php if($is_auth == 1):?>
           <div class="lot-item__state">
           <?php $res = get_time_left($good['date_finish'])?>
             <div class="lot__timer timer <?php if ($res[0]<1): ?> timer--finishing<?php endif;?>">
@@ -33,6 +34,7 @@
               <button type="submit" class="button">Сделать ставку</button>
             </form>
           </div>
+          <?php endif;?>
           <div class="history">
             <h3>История ставок (<span>10</span>)</h3>
             <table class="history__list">

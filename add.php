@@ -4,6 +4,10 @@ require_once("helpers.php");
 require_once("database.php");
 require_once("models.php");
 require_once("validators.php");
+if($is_auth == 0) {
+    header("HTTP/1.1 403 ne ok");
+    die();
+}
 if (!$con) {
     $error = mysqli_connect_error();
 } else {
@@ -78,7 +82,8 @@ if($_SERVER["REQUEST_METHOD"] === 'POST') {
             "lot" => $lot,
         ]);
     } else {
-        $sql = add_lot($con, 2);
+        $lot[] = $user_id;
+        $sql = add_lot($con);
         $stmt = db_get_prepare_stmt($con, $sql, $lot);
         $res = mysqli_stmt_execute($stmt);   
         if ($res) {

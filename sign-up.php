@@ -4,14 +4,16 @@ require_once("helpers.php");
 require_once("database.php");
 require_once("models.php");
 require_once("validators.php");
+if($is_auth == 1) {
+    header("HTTP/1.1 403 ne ok");
+    die();
+}
 if (!$con) {
     $error = mysqli_connect_error();
 } else {
     $categories = get_categories($con);
 }
-$page_content = include_template("sign-up.php", [
-    'categories' => $categories,
-]);
+$page_content = include_template("sign-up.php", []);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     $required = ['email', 'password', 'name', 'message'];
@@ -92,7 +94,6 @@ $layout_content = include_template("base-layout.php", [
     'categories' => $categories,
     'content'=>$page_content,
     'title' => 'Регистрация',
-    "user_name" => $user_name,
-    "is_auth" => $is_auth,
+    "is_auth" => 0,
 ]);
 print($layout_content);

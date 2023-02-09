@@ -1,10 +1,8 @@
 <?php
-require_once("data.php");
 require_once("helpers.php");
 require_once("database.php");
 require_once("models.php");
-
-
+require_once("data.php");
 if (!$con) {
     $error = mysqli_connect_error();
 } else {    

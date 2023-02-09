@@ -19,13 +19,13 @@
       </div>
       <div class="form__item <?=isset($errors['message']) ? 'form__item--invalid' : ''?>">
         <label for="message">Контактные данные <sup>*</sup></label>
-        <textarea id="message" name="message" value="<?= $user['message'] ?? "" ;?>" placeholder="Напишите как с вами связаться"></textarea>
+        <textarea id="message" name="message" placeholder="Напишите как с вами связаться"><?= $user['message'] ?? "" ;?></textarea>
         <span class="form__error"><?=$errors['message'] ?? ''?></span>
       </div><?php if (!empty($errors)):?>
       <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
       <?php endif;?>
       <button type="submit" class="button">Зарегистрироваться</button>
-      <a class="text-link" href="#">Уже есть аккаунт</a>
+      <a class="text-link" href="/login.php">Уже есть аккаунт</a>
     </form>
   </main>
 

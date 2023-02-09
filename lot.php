@@ -19,7 +19,8 @@ if (!$con) {
 
 $page_content = include_template("lot.php", [
     'good' => $good[0],
-    'title' => $good[0]['title']
+    'title' => $good[0]['title'],
+    'is_auth' => $is_auth,
 ]);
 
 $layout_content = include_template("base-layout.php", [

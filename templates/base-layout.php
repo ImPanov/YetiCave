@@ -27,7 +27,7 @@
         
         <nav class="user-menu">
 
-        <?php if($is_auth === 1): ?>
+        <?php if($is_auth == true): ?>
         <div class="user-menu__logged">
             <p><?=$user_name?></p>
             <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
@@ -39,7 +39,7 @@
                 <a href="/sign-up.php">Регистрация</a>
             </li>
             <li class="user-menu__item">
-                <a href="#">Вход</a>
+                <a href="/login.php">Вход</a>
             </li>
         </ul>
         <?php endif?>

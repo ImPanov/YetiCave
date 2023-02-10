@@ -53,3 +53,23 @@ function get_auth_user($con,$email) {
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+function get_search_lots($con,$words) {
+    $sql = "SELECT * FROM lots
+    WHERE MATCH(title, lot_description) AGAINST('$words')";    
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function get_search_counts($con,$words) {
+    $sql = "SELECT COUNT(id) as count FROM lots
+    WHERE MATCH(title, lot_description) AGAINST('$words')";    
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_NUM);
+}
+function get_search_items($con,$words,$page_items,$offset) {
+    $sql = "SELECT lots.id, lots.title, lots.start_price, lots.img, lots.date_finish, c.category_name
+    FROM lots JOIN categories c ON c.id = lots.category_id
+    WHERE MATCH(title, lot_description) AGAINST('$words')
+    LIMIT $page_items OFFSET $offset";    
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}

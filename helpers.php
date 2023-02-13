@@ -165,7 +165,7 @@ function format_string($num) {
  * Ограничений: строка с датой в формате YYYY-MM-DD
  *  
  *  @param string $date
- *  @return string вывод разницы часы минуты
+ *  @return string вывод разницы дни часы минуты
  */
 function get_time_left($date) {
     date_default_timezone_set("Europe/Moscow");
@@ -174,11 +174,13 @@ function get_time_left($date) {
     $diff = date_diff($final_date,$cur_date);
     $format_diff = $diff->format("%d %H %I");
     $arr = explode(" ",$format_diff);
-    $hours = $arr[0] * 24 + $arr[1];
+    $days = $arr[0];
+    $hours = $arr[1];
     $minutes = $arr[2];
+    $days = str_pad($hours, 2, "0",STR_PAD_LEFT);
     $hours = str_pad($hours, 2, "0",STR_PAD_LEFT);
     $minutes = str_pad($minutes, 2, "0",STR_PAD_LEFT);
-
+    $res[] = $days;
     $res[] = $hours;
     $res[] = $minutes;
 

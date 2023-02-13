@@ -25,11 +25,11 @@
                 Мин. ставка <span><?=$good['start_price']+$good['step']?></span>
               </div>
             </div>
-            <form class="lot-item__form" action="/lot.php" method="post" autocomplete="off">
+            <form class="lot-item__form" action="../lot.php?id=<?=$good['id']?>" method="post" autocomplete="off">
               <p class="lot-item__form-item form__item form__item--invalid">
                 <label for="cost">Ваша ставка</label>
                 <input id="cost" type="text" name="cost" placeholder="<?=$good['start_price']+$good['step']?>">
-                <span class="form__error"><?$errors['cost']?></span>
+              <span class="form__error"><?=$errors['cost'] ?? ''?></span>
               </p>
               <button type="submit" class="button">Сделать ставку</button>
             </form>

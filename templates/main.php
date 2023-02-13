@@ -30,8 +30,8 @@
                             <span class="lot__cost"><?=htmlspecialchars(format_string($good['start_price']));?><b class="rub">р</b></span>
                         </div>
                         <?php $res = get_time_left($good['date_finish'])?>
-                        <div class="lot__timer timer <?php if ($res[0]<1): ?> timer--finishing<?php endif;?>">
-                            <?="$res[0] : $res[1]"?>
+                        <div class="lot__timer timer <?php if ($res[1]<1): ?> timer--finishing<?php endif;?>">
+                            <?="$res[0] : $res[1] : $res[2]"?>
                         </div>
                     </div>
                 </div>

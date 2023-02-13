@@ -163,8 +163,9 @@ SELECT * FROM lots
 WHERE date_creation < CURRENT_TIMESTAMP;
 SELECT *,categories.category_name FROM lots INNER JOIN categories ON categories.id=lots.category_id;
 UPDATE lots SET title = "Маска Oakley Canopy" , lot_description="Классная маска" WHERE id = 6;
-SELECT *, lots.title, user.user_name FROM bets
+SELECT *,lots.id as lots_id, categories.category_name lots.title, user.user_name FROM bets
 INNER JOIN lots ON bets.lot_id=lots.id
+INNER JOIN categories ON categories.lot_id=lots.id
 INNER JOIN user ON bets.user_id=user.id
 WHERE lot_id=4
 ORDER BY date_bet DESC;

@@ -6,7 +6,7 @@
  * @return array lot
  */
 function get_lot($con,$id) {
-    $sql = "SELECT lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
+    $sql = "SELECT lots.id, lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
     FROM lots JOIN categories c ON c.id = lots.category_id
     WHERE lots.id = $id";
     $result = mysqli_query($con, $sql);
@@ -41,7 +41,7 @@ function get_user($con) {
 }
 
 function add_lot($con) {
-    $sql = "INSERT INTO lots (title, category_id, lot_description, start_price, step, date_finish, img, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO lots (title, category_id, lot_description, start_price, step, date_finish, img, user_id, winner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     return $sql;
 }
 function add_user($con) {
@@ -70,6 +70,30 @@ function get_search_items($con,$words,$page_items,$offset) {
     FROM lots JOIN categories c ON c.id = lots.category_id
     WHERE MATCH(title, lot_description) AGAINST('$words')
     LIMIT $page_items OFFSET $offset";    
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function get_query_update_lot_bet($con,$bet,$id_lot) {
+    $sql = "UPDATE lots SET start_price = $bet where id = $id_lot";
+    return mysqli_query($con,$sql);
+}
+function get_query_update_lot_winner($con,$id_lot,$id_user) {
+$sql = "UPDATE lots SET winner_id=$id_user where id = $id_lot";
+return mysqli_query($con,$sql);
+}
+
+function get_query_add_bet($con,$bet,$id_lot,$id_user) {
+    $sql = "INSERT INTO bets(price_bet,user_id,lot_id) VALUES($bet,$id_user,$id_lot)";
+    return mysqli_query($con,$sql);
+}
+function history_bet($con,$id_user) {
+    $sql = "SELECT lots.winner_id, lots.img,bets.date_bet,bets.price_bet,lots.date_finish,lots.id as lot_id, categories.category_name, lots.title
+    FROM bets
+    INNER JOIN lots ON bets.lot_id=lots.id
+    INNER JOIN categories ON categories.id=lots.category_id
+    INNER JOIN users ON bets.user_id=users.id
+    WHERE users.id=$id_user
+    ORDER BY date_bet DESC;";
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }

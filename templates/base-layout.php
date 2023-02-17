@@ -16,7 +16,7 @@
     
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
-        <a class="main-header__logo">
+        <a class="main-header__logo" href="/all-lots.php">
             <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
         <form class="main-header__search" method="get" action="search.php" autocomplete="off">
@@ -51,7 +51,7 @@
             <!--заполните этот список из массива категорий-->
             <?php  foreach($categories as $category):?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=htmlspecialchars($category['category_name']);?></a>
+                <a href="all-lots.php?category=<?=$category['character_code']?>"><?=htmlspecialchars($category['category_name']);?></a>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -68,7 +68,7 @@
             <!--заполните этот список из массива категорий-->
             <?php  foreach($categories as $category):?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=htmlspecialchars($category['category_name']);?></a>
+                <a href="all-lots.php?category=<?=$category['character_code']?>"><?=htmlspecialchars($category['category_name']);?></a>
             </li>
             <?php endforeach; ?>
         </ul>

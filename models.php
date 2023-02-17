@@ -12,6 +12,18 @@ function get_lot($con,$id) {
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+function get_lots($con,$category=null) {
+    if (!$category) {
+    $sql = "SELECT lots.id, lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
+    FROM lots JOIN categories c ON c.id = lots.category_id";
+    } else {
+    $category = mysqli_real_escape_string($con,$category);
+    $sql = "SELECT lots.id, lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
+    FROM lots JOIN categories c ON c.id = lots.category_id and c.character_code = '$category'";
+    }
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 /**
  * Summary of get_query_news_lots
  * function return lots where date finishing less 3 current 

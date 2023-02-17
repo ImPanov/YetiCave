@@ -83,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] === 'POST') {
         ]);
     } else {
         $lot[] = $user_id;
+        $lot[] = $user_id;
         $sql = add_lot($con);
         $stmt = db_get_prepare_stmt($con, $sql, $lot);
         $res = mysqli_stmt_execute($stmt);   

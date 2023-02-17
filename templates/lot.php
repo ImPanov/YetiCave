@@ -6,8 +6,8 @@
           <div class="lot-item__image">
             <img src="../<?=$good['img'];?>" width="730" height="548" alt="Сноуборд">
           </div>
-          <p class="lot-item__category">Категория: <span><?$good['category_name']?></span></p>
-          <p class="lot-item__description"><?$good['lot_description']?></p>
+          <p class="lot-item__category">Категория: <span><?=$good['category_name']?></span></p>
+          <p class="lot-item__description"><?=$good['lot_description']?></p>
         </div>
         <div class="lot-item__right">          
         <?php if($is_auth == 1):?>
@@ -36,58 +36,25 @@
           </div>
           <?php endif;?>
           <div class="history">
-            <h3>История ставок (<span>10</span>)</h3>
+            <h3>История ставок (<span><?=count($bets)?></span>)</h3>
             <table class="history__list">
+              <?php foreach($bets as $bet): ?>
               <tr class="history__item">
-                <td class="history__name">Иван</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">5 минут назад</td>
+                <td class="history__name"><?=$bet['user_name']?></td>
+                <td class="history__price"><?=$bet['price_bet']?></td>
+                <td class="history__time"><?php $res = get_time_left($bet['date_bet']);?>
+          <?php if($res[0]>1) { ?>
+              <?=date_format(date_create($bet['date_bet']),'m.d.Y')?> в <?="$res[1]:$res[2]"?>
+          <?php } elseif($res[0]==1) { ?>
+              Вчера, в <?="$res[1]:$res[2]"?>
+          <?php } elseif($res[1]>1) { ?>
+              Сегодня, в <?="$res[1]:$res[2]"?>
+          <?php  } elseif($res[1]==1) { ?>
+              час назад
+          <?php  } elseif($res[1]<1) { ?>
+            <?=get_noun_plural_form($res[2],'минута','минуты','минут') ?> назад <?php } ?></td>
               </tr>
-              <tr class="history__item">
-                <td class="history__name">Константин</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">20 минут назад</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Евгений</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">Час назад</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Игорь</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 08:21</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Енакентий</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 13:20</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Семён</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 12:20</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Илья</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 10:20</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Енакентий</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 13:20</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Семён</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 12:20</td>
-              </tr>
-              <tr class="history__item">
-                <td class="history__name">Илья</td>
-                <td class="history__price">10 999 р</td>
-                <td class="history__time">19.03.17 в 10:20</td>
-              </tr>
+              <?php endforeach;?>
             </table>
           </div>
         </div>

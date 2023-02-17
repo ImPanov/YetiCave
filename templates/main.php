@@ -5,9 +5,10 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach($categories as $category):?>
             <li class="promo__item promo__item--<?=$category["character_code"]?>">
-                <a class="promo__link" href="pages/all-lot.html"><?=htmlspecialchars($category["category_name"]);?></a>
+                <a class="promo__link" href="all-lots.php?category=<?=$category['character_code']?>"><?=htmlspecialchars($category["category_name"]);?></a>
             </li>
             <?php endforeach; ?>
+            
         </ul>
     </section>
     <section class="lots">

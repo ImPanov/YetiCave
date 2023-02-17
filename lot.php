@@ -12,6 +12,7 @@ if (!$con) {
     if ($id) {
         $categories = get_categories($con);
         $good = get_lot($con, $id);
+        $bets = history_bet_lot($con,$id);
     } else {
         http_response_code(404);
         die();
@@ -20,7 +21,8 @@ if (!$con) {
 $page_content = include_template("lot.php", [
     'good' => $good[0],
     'title' => $good[0]['title'],
-    'is_auth' => $is_auth,
+    'is_auth' => $is_auth,    
+    'bets' => $bets,
 ]);
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     $required = ['cost'];
@@ -52,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
             'title' => $good[0]['title'],
             'is_auth' => $is_auth,
             'errors' => $errors,
+            'bets' => $bets,
         ]);
     } else {
     if($bet['cost']>=$good[0]['step']+$good[0]['start_price']){
@@ -72,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
             'title' => $good[0]['title'],
             'is_auth' => $is_auth,
             'errors' => $errors,
+            'bets' => $bets,
         ]);
     }
     }

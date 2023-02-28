@@ -5,10 +5,10 @@
         <tr class="rates__item">
           <td class="rates__info">
             <div class="rates__img">
-              <img src="<?=$good['img']?>" width="54" height="40" alt="<?=$good['category_name']?>">
+              <img src="<?=$good['img']?>" width="54" height="40" alt="<?=htmlspecialchars($good['category_name'])?>">
             </div>
             
-            <h3 class="rates__title"><a href="lot.php?id=<?$good['lot_id']?>"><?=$good['title']?></a></h3>
+            <h3 class="rates__title"><a href="lot.php?id=<?$good['lot_id']?>"><?=htmlspecialchars($good['title'])?></a></h3>
           </td>
           <td class="rates__category">
             <?$good['category_name']?>

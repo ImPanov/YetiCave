@@ -4,10 +4,10 @@
       <div class="lot-item__content">
         <div class="lot-item__left">
           <div class="lot-item__image">
-            <img src="../<?=$good['img'];?>" width="730" height="548" alt="Сноуборд">
+            <img src="../<?=htmlspecialchars($good['img']);?>" width="730" height="548" alt="Сноуборд">
           </div>
-          <p class="lot-item__category">Категория: <span><?=$good['category_name']?></span></p>
-          <p class="lot-item__description"><?=$good['lot_description']?></p>
+          <p class="lot-item__category">Категория: <span><?=htmlspecialchars($good['category_name'])?></span></p>
+          <p class="lot-item__description"><?=htmlspecialchars($good['lot_description'])?></p>
         </div>
         <div class="lot-item__right">          
         <?php if($is_auth == 1):?>
@@ -40,7 +40,7 @@
             <table class="history__list">
               <?php foreach($bets as $bet): ?>
               <tr class="history__item">
-                <td class="history__name"><?=$bet['user_name']?></td>
+                <td class="history__name"><?=htmlspecialchars($bet['user_name'])?></td>
                 <td class="history__price"><?=$bet['price_bet']?></td>
                 <td class="history__time"><?php $res = get_time_left($bet['date_bet']);?>
           <?php if($res[0]>1) { ?>

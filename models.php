@@ -8,7 +8,7 @@
 function get_lot($con,$id): array {
     $sql = "SELECT lots.id, lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
     FROM lots JOIN categories c ON c.id = lots.category_id
-    WHERE lots.id = $id";
+    WHERE lots.id = $id and unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0";
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_ASSOC);
 }
@@ -21,6 +21,7 @@ function get_lots($con,$category=null): array {
     $sql = "SELECT lots.id, lots.step, lots.id, lots.lot_description, lots.title as title, lots.start_price, lots.img, lots.date_finish, c.category_name
     FROM lots JOIN categories c ON c.id = lots.category_id and c.character_code = '$category'";
     }
+    $sql .= " WHERE unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0";
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_ASSOC);
 }
@@ -32,7 +33,7 @@ function get_lots($con,$category=null): array {
 function get_new_lots($con): array {
     $sql = "SELECT lots.id, lots.title, lots.start_price, lots.img, lots.date_finish, c.category_name
     FROM lots JOIN categories c ON c.id = lots.category_id
-    WHERE lots.date_creation > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 DAY)";
+    WHERE lots.date_creation > DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -3 DAY) and unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0";
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_ASSOC);
 }
@@ -67,20 +68,20 @@ function get_auth_user($con,$email): array {
 }
 function get_search_lots($con,$words): array {
     $sql = "SELECT * FROM lots
-    WHERE MATCH(title, lot_description) AGAINST('$words')";    
+    WHERE MATCH(title, lot_description) AGAINST('$words') and unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0";    
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_ASSOC);
 }
 function get_search_counts($con,$words): array {
     $sql = "SELECT COUNT(id) as count FROM lots
-    WHERE MATCH(title, lot_description) AGAINST('$words')";    
+    WHERE MATCH(title, lot_description) AGAINST('$words') and unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0";    
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_NUM);
 }
 function get_search_items($con,$words,$page_items,$offset): array {
     $sql = "SELECT lots.id, lots.title, lots.start_price, lots.img, lots.date_finish, c.category_name
     FROM lots JOIN categories c ON c.id = lots.category_id
-    WHERE MATCH(title, lot_description) AGAINST('$words')
+    WHERE MATCH(title, lot_description) AGAINST('$words') and unix_timestamp(lots.date_finish) - unix_timestamp(CURRENT_TIMESTAMP) > 0
     LIMIT $page_items OFFSET $offset";    
     $result = mysqli_query(mysql: $con, query: $sql);
     return mysqli_fetch_all(result: $result, mode: MYSQLI_ASSOC);

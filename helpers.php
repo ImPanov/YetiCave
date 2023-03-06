@@ -172,6 +172,10 @@ function get_time_left($date) {
     $final_date = date_create($date);
     $cur_date = date_create("now");
     $diff = date_diff($final_date,$cur_date);
+    // if(intval($diff->format("%y"))<1970) {
+    //     $res = null;
+    //     return $res;ы
+    // }
     $format_diff = $diff->format("%d %H %I");
     $arr = explode(" ",$format_diff);
     $days = $arr[0];

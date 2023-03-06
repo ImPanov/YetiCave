@@ -5,6 +5,8 @@
         <ul class="lots__list">
             <!--заполните этот список из массива с товарами-->
             <?php foreach($goods as $good):?>
+                <?php $res = get_time_left($good['date_finish'])?>
+                
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="../<?=$good['img'];?>" width="350" height="260" alt="">
@@ -17,7 +19,7 @@
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?=htmlspecialchars(format_string($good['start_price']));?><b class="rub">р</b></span>
                         </div>
-                        <?php $res = get_time_left($good['date_finish'])?>
+                        
                         <div class="lot__timer timer <?php if ($res[1]<1): ?> timer--finishing<?php endif;?>">
                             <?="$res[0] : $res[1] : $res[2]"?>
                         </div>
